@@ -92,18 +92,9 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.4",
-        "@deriv/account": "^1.0.0",
-        "@deriv/appstore": "^0.0.4",
-        "@deriv/bot-web-ui": "^1.0.0",
-        "@deriv/cashier": "^1.0.0",
-        "@deriv/cfd": "^1.0.0",
         "@deriv/components": "^1.0.0",
         "@deriv/deriv-api": "^1.0.8",
         "@deriv/deriv-charts": "^0.5.1",
-        "@deriv/p2p": "^0.7.3",
-        "@deriv/shared": "^1.0.0",
-        "@deriv/trader": "^3.8.0",
-        "@deriv/translations": "^1.0.0",
         "@livechat/customer-sdk": "^2.0.4",
         "acorn": "^6.1.1",
         "babel-polyfill": "^6.26.0",
@@ -119,6 +110,7 @@
         "mobx": "6.5.0",
         "mobx-react": "7.3.0",
         "mobx-utils": "6.0.5",
+        "mobx-undecorate": "1.2.0",
         "moment": "^2.24.0",
         "null-loader": "^4.0.1",
         "object.fromentries": "^2.0.0",
@@ -136,5 +128,16 @@
         "react-transition-group": "^4.3.0",
         "react-window": "^1.8.5",
         "web-push-notifications": "^3.24.0"
-    }
+    },
+    "dependenciesComments": {
+        "@deriv/account": "^1.0.0",
+        "@deriv/appstore": "^0.0.4",
+        "@deriv/bot-web-ui": "^1.0.0",
+        "@deriv/cashier": "^1.0.0",
+        "@deriv/cfd": "^1.0.0",
+        "@deriv/p2p": "^0.7.3",
+        "@deriv/shared": "^1.0.0",
+        "@deriv/trader": "^3.8.0",
+        "@deriv/translations": "^1.0.0"
+      }
 }

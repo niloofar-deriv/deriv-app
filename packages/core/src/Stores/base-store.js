@@ -86,8 +86,7 @@ export default class BaseStore {
             disposeRealAccountSignupEnd: action.bound,
             onUnmount: action.bound,
             assertHasValidCache: action.bound,
-
-        })
+        });
         Object.defineProperty(this, 'root_store', {
             enumerable: false,
             writable: true,
@@ -332,7 +331,6 @@ export default class BaseStore {
         }
     }
 
-
     onPreSwitchAccount(listener) {
         if (listener) {
             this.pre_switch_account_listener = listener;
@@ -388,7 +386,6 @@ export default class BaseStore {
         this.logout_listener = listener;
     }
 
-
     onClientInit(listener) {
         this.clientInitDisposer = when(
             () => this.root_store.client.initialized_broadcast,
@@ -434,7 +431,6 @@ export default class BaseStore {
         this.network_status_change_listener = listener;
     }
 
-
     onThemeChange(listener) {
         this.themeChangeDisposer = reaction(
             () => this.root_store.ui.is_dark_mode_on,
@@ -453,7 +449,6 @@ export default class BaseStore {
 
         this.theme_change_listener = listener;
     }
-
 
     onRealAccountSignupEnd(listener) {
         this.realAccountSignupEndedDisposer = when(
@@ -481,7 +476,6 @@ export default class BaseStore {
 
         this.real_account_signup_ended_listener = listener;
     }
-
 
     disposePreSwitchAccount() {
         if (typeof this.preSwitchAccountDisposer === 'function') {

@@ -345,7 +345,6 @@ export default class ClientStore extends BaseStore {
             setRealityCheckDuration: action.bound,
             cleanupRealityCheck: action.bound,
             fetchFinancialAssessment: action.bound,
-
         });
         reaction(
             () => [
@@ -382,7 +381,6 @@ export default class ClientStore extends BaseStore {
         return !!(this.has_reality_check && !this.reality_check_dismissed);
     }
 
-
     get is_svg() {
         if (!this.landing_company_shortcode) {
             return false;
@@ -390,11 +388,9 @@ export default class ClientStore extends BaseStore {
         return this.landing_company_shortcode === 'svg' || this.landing_company_shortcode === 'costarica';
     }
 
-
     get reality_check_duration() {
         return this.has_reality_check ? this.reality_check_dur || +LocalStore.get('reality_check_duration') : undefined;
     }
-
 
     get reality_check_dismissed() {
         return this.has_reality_check
@@ -466,7 +462,6 @@ export default class ClientStore extends BaseStore {
 
         return getDefaultAllowedCurrencies();
     }
-
 
     get upgradeable_currencies() {
         if (!this.legal_allowed_currencies || !this.website_status.currencies_config) return [];
@@ -740,8 +735,8 @@ export default class ClientStore extends BaseStore {
         const mt_gaming_shortcode = mt_gaming_company?.financial.shortcode || mt_gaming_company?.swap_free.shortcode;
         return financial_shortcode || gaming_shortcode || mt_gaming_shortcode
             ? eu_shortcode_regex.test(financial_shortcode) ||
-            eu_shortcode_regex.test(gaming_shortcode) ||
-            eu_shortcode_regex.test(mt_gaming_shortcode)
+                  eu_shortcode_regex.test(gaming_shortcode) ||
+                  eu_shortcode_regex.test(mt_gaming_shortcode)
             : eu_excluded_regex.test(this.residence);
     }
 
@@ -928,7 +923,7 @@ export default class ClientStore extends BaseStore {
     /**
      * Store Values relevant to the loginid to local storage.
      *
-     * 
+     *
      */
     resetLocalStorageValues(loginid) {
         this.accounts[loginid].accepted_bch = 0;
@@ -1000,12 +995,10 @@ export default class ClientStore extends BaseStore {
         });
     }
 
-
     setPreferredLanguage = lang => {
         this.preferred_language = lang;
         LocalStore.setObject(LANGUAGE_KEY, lang);
     };
-
 
     setCookieAccount() {
         const domain = /deriv\.(com|me)/.test(window.location.hostname) ? deriv_urls.DERIV_HOST_NAME : 'binary.sx';
@@ -1067,13 +1060,11 @@ export default class ClientStore extends BaseStore {
         });
     }
 
-
     responsePayoutCurrencies(response) {
         const list = response.payout_currencies || response;
         this.currencies_list = buildCurrenciesList(list);
         this.selectCurrency('');
     }
-
 
     responseAuthorize(response) {
         this.accounts[this.loginid].email = response.authorize.email;
@@ -1095,13 +1086,11 @@ export default class ClientStore extends BaseStore {
             : +response.authorize.local_currencies[this.local_currency_config.currency].fractional_digits;
     }
 
-
     setWebsiteStatus(response) {
         this.website_status = response.website_status;
         this.responseWebsiteStatus(response);
         setCurrencies(this.website_status);
     }
-
 
     async accountRealReaction(response) {
         return new Promise(resolve => {
@@ -1148,7 +1137,6 @@ export default class ClientStore extends BaseStore {
         });
     }
 
-
     setLoginInformation(client_accounts, client_id) {
         this.setAccounts(client_accounts);
         localStorage.setItem(storage_key, JSON.stringify(client_accounts));
@@ -1158,7 +1146,6 @@ export default class ClientStore extends BaseStore {
         this.setSwitched(client_id);
         this.syncWithLegacyPlatforms(client_id, client_accounts);
     }
-
 
     async realAccountSignup(form_values) {
         const DEFAULT_CRYPTO_ACCOUNT_CURRENCY = 'BTC';
@@ -1190,25 +1177,24 @@ export default class ClientStore extends BaseStore {
                 ...response,
                 ...(is_maltainvest_account
                     ? {
-                        new_account_maltainvest: {
-                            ...response.new_account_maltainvest,
-                            currency,
-                        },
-                    }
+                          new_account_maltainvest: {
+                              ...response.new_account_maltainvest,
+                              currency,
+                          },
+                      }
                     : {}),
                 ...(is_samoa_account
                     ? {
-                        new_account_samoa: {
-                            currency,
-                        },
-                    }
+                          new_account_samoa: {
+                              currency,
+                          },
+                      }
                     : {}),
             });
         }
 
         return Promise.reject(response.error);
     }
-
 
     async setAccountCurrency(currency) {
         const response = await WS.setAccountCurrency(currency, {
@@ -1220,7 +1206,6 @@ export default class ClientStore extends BaseStore {
         }
         return Promise.reject(response.error);
     }
-
 
     async updateAccountCurrency(currency, is_set_storage = true) {
         runInAction(() => {
@@ -1242,7 +1227,6 @@ export default class ClientStore extends BaseStore {
         });
         await this.init();
     }
-
 
     async createCryptoAccount(currency) {
         const residence = this.residence;
@@ -1309,7 +1293,6 @@ export default class ClientStore extends BaseStore {
         return !/crs_tin_information/.test((this.account_status || {})?.status);
     };
 
-
     updateAccountList(account_list) {
         account_list.forEach(account => {
             if (this.accounts[account.loginid]) {
@@ -1340,7 +1323,6 @@ export default class ClientStore extends BaseStore {
         this.responsePayoutCurrencies(await WS.authorized.payoutCurrencies());
     }
 
-
     async resetVirtualBalance() {
         this.root_store.notifications.removeNotificationByKey({ key: 'reset_virtual_balance' });
         this.root_store.notifications.removeNotificationMessage({
@@ -1349,7 +1331,6 @@ export default class ClientStore extends BaseStore {
         });
         await WS.authorized.topupVirtual();
     }
-
 
     switchEndSignal() {
         this.switch_broadcast = false;
@@ -1467,11 +1448,9 @@ export default class ClientStore extends BaseStore {
         return true;
     }
 
-
     resetMt5AccountListPopulation() {
         this.is_populating_mt5_account_list = false;
     }
-
 
     responseWebsiteStatus(response) {
         this.website_status = response.website_status;
@@ -1490,14 +1469,12 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     responseLandingCompany(response) {
         this.is_landing_company_loaded = true;
         this.landing_companies = response.landing_company;
         this.setStandpoint(this.landing_companies);
         this.setRealityCheck();
     }
-
 
     setStandpoint(landing_companies) {
         if (!landing_companies) return;
@@ -1518,7 +1495,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     setRealityCheck() {
         this.has_reality_check = this.current_landing_company?.has_reality_check;
         // if page reloaded after reality check was submitted
@@ -1532,16 +1508,13 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     setLoginId(loginid) {
         this.loginid = loginid;
     }
 
-
     setAccounts(accounts) {
         this.accounts = accounts;
     }
-
 
     setSwitched(switched) {
         this.switched = switched;
@@ -1566,12 +1539,11 @@ export default class ClientStore extends BaseStore {
     /**
      * Get account object from given login id
      *
-     * 
+     *
      */
     getAccount(loginid = this.loginid) {
         return this.accounts[loginid];
     }
-
 
     getAccountInfo(loginid = this.loginid) {
         const account = this.getAccount(loginid);
@@ -1620,7 +1592,6 @@ export default class ClientStore extends BaseStore {
     isUnableToFindLoginId() {
         return !this.all_loginids.some(id => id !== this.switched) || this.switched === this.loginid;
     }
-
 
     async switchAccountHandler() {
         if (!this.switched || !this.switched.length || !this.getAccount(this.switched)?.token) {
@@ -1674,7 +1645,6 @@ export default class ClientStore extends BaseStore {
         runInAction(() => (this.is_switching = false));
     }
 
-
     registerReactions() {
         // Switch account reactions.
         when(
@@ -1690,7 +1660,6 @@ export default class ClientStore extends BaseStore {
             }
         );
     }
-
 
     setBalanceActiveAccount(obj_balance) {
         if (this.accounts[obj_balance?.loginid] && obj_balance.loginid === this.loginid) {
@@ -1743,38 +1712,31 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     selectCurrency(value) {
         this.selected_currency = value;
     }
 
-
     setResidence(residence) {
         this.accounts[this.loginid].residence = residence;
     }
-
 
     setEmail(email) {
         this.accounts[this.loginid].email = email;
         this.email = email;
     }
 
-
     setAccountSettings(settings) {
         this.account_settings = settings;
         this.is_account_setting_loaded = true;
     }
 
-
     setAccountStatus(status) {
         this.account_status = status;
     }
 
-
     setInitialized(is_initialized) {
         this.initialized_broadcast = is_initialized;
     }
-
 
     cleanUp() {
         this.root_store.gtm.pushDataLayer({
@@ -1797,7 +1759,6 @@ export default class ClientStore extends BaseStore {
         this.cleanupRealityCheck();
     }
 
-
     async logout() {
         // TODO: [add-client-action] - Move logout functionality to client store
         const response = await requestLogout();
@@ -1811,7 +1772,6 @@ export default class ClientStore extends BaseStore {
 
         return response;
     }
-
 
     setLogout(is_logged_out) {
         this.has_logged_out = is_logged_out;
@@ -1880,7 +1840,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     async setUserLogin(login_new_user) {
         // login_new_user is populated only on virtual sign-up
         let obj_params = {};
@@ -1943,7 +1902,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     canStoreClientAccounts(obj_params, account_list) {
         const is_ready_to_process = account_list && isEmptyObject(this.accounts);
         const accts = Object.keys(obj_params).filter(value => /^acct./.test(value));
@@ -1954,7 +1912,6 @@ export default class ClientStore extends BaseStore {
 
         return is_ready_to_process && is_cross_checked;
     }
-
 
     setVerificationCode(code, action) {
         this.verification_code[action] = code;
@@ -1969,7 +1926,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     setNewEmail(email, action) {
         this.new_email[action] = email;
         if (email) {
@@ -1979,11 +1935,9 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     setDeviceData() {
         setDeviceDataCookie('signup_device', isDesktopOs() ? 'desktop' : 'mobile');
     }
-
 
     getSignupParams() {
         const param_list = [
@@ -2016,7 +1970,6 @@ export default class ClientStore extends BaseStore {
         return signup_params;
     }
 
-
     onSetResidence({ residence }, cb) {
         if (!residence) return;
         WS.setSettings({
@@ -2041,7 +1994,6 @@ export default class ClientStore extends BaseStore {
             }
         });
     }
-
 
     onSignup({ password, residence }, cb) {
         if (!this.verification_code.signup || !password || !residence) return;
@@ -2083,7 +2035,6 @@ export default class ClientStore extends BaseStore {
         this.broadcastAccountChange();
     }
 
-
     fetchAccountSettings() {
         return new Promise(resolve => {
             WS.authorized.storage.getSettings().then(response => {
@@ -2092,7 +2043,6 @@ export default class ClientStore extends BaseStore {
             });
         });
     }
-
 
     fetchResidenceList() {
         return new Promise(resolve => {
@@ -2103,11 +2053,9 @@ export default class ClientStore extends BaseStore {
         });
     }
 
-
     setResidenceList(residence_list_response) {
         this.residence_list = residence_list_response.residence_list || [];
     }
-
 
     fetchStatesList() {
         return new Promise((resolve, reject) => {
@@ -2128,13 +2076,11 @@ export default class ClientStore extends BaseStore {
         });
     }
 
-
     resetMt5ListPopulatedState() {
         this.is_mt5_account_list_updated = false;
         this.is_populating_mt5_account_list = true;
         this.mt5_login_list_error = null;
     }
-
 
     async updateMt5LoginList() {
         if (this.is_logged_in && !this.is_mt5_account_list_updated && !this.is_populating_mt5_account_list) {
@@ -2143,7 +2089,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     responseMT5TradingServers(response) {
         if (response.error) {
             this.mt5_trading_servers = [];
@@ -2151,7 +2096,6 @@ export default class ClientStore extends BaseStore {
         }
         this.mt5_trading_servers = response.trading_servers;
     }
-
 
     responseMt5LoginList(response) {
         this.is_populating_mt5_account_list = false;
@@ -2194,7 +2138,6 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     responseDxtradeTradingServers(response) {
         if (response.error) {
             this.dxtrade_trading_servers = [];
@@ -2211,7 +2154,6 @@ export default class ClientStore extends BaseStore {
             }
         });
     }
-
 
     responseTradingPlatformAccountsList(response) {
         const { platform } = response.echo_req || {};
@@ -2246,13 +2188,11 @@ export default class ClientStore extends BaseStore {
         }
     }
 
-
     responseStatement(response) {
         if (!response.error) {
             this.statement = response.statement;
         }
     }
-
 
     getChangeableFields() {
         const get_settings =
@@ -2263,7 +2203,6 @@ export default class ClientStore extends BaseStore {
         const readonly_fields = [...get_settings.immutable_fields, ...['immutable_fields', 'email', 'password']];
         return Object.keys(get_settings).filter(field => !readonly_fields.includes(field));
     }
-
 
     syncWithLegacyPlatforms(active_loginid, client_accounts) {
         const smartTrader = {};
@@ -2304,7 +2243,6 @@ export default class ClientStore extends BaseStore {
         return !!this.accounts[this.loginid]?.residence;
     }
 
-
     setVisibilityRealityCheck(is_visible) {
         // if reality check timeout has been set, don't make it visible until it runs out
         if (is_visible && typeof this.reality_check_timeout === 'number') {
@@ -2315,12 +2253,10 @@ export default class ClientStore extends BaseStore {
         LocalStore.set('reality_check_dismissed', !is_visible);
     }
 
-
     clearRealityCheckTimeout() {
         clearTimeout(this.reality_check_timeout);
         this.reality_check_timeout = undefined;
     }
-
 
     setRealityCheckDuration(duration) {
         this.reality_check_dur = +duration;
@@ -2335,7 +2271,6 @@ export default class ClientStore extends BaseStore {
         }, +duration * 60 * 1000);
     }
 
-
     cleanupRealityCheck() {
         this.has_reality_check = false;
         this.is_reality_check_dismissed = undefined;
@@ -2344,7 +2279,6 @@ export default class ClientStore extends BaseStore {
         LocalStore.remove('reality_check_duration');
         LocalStore.remove('reality_check_dismissed');
     }
-
 
     fetchFinancialAssessment() {
         return new Promise(async resolve => {
