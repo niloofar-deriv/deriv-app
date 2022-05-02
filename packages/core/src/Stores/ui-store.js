@@ -123,7 +123,7 @@ export default class UIStore extends BaseStore {
     is_landscape = false;
 
     prompt_when = false;
-    promptFn = () => { };
+    promptFn = () => {};
 
     // MT5 account needed modal
     is_account_needed_modal_on = false;
@@ -288,7 +288,7 @@ export default class UIStore extends BaseStore {
             toggleShouldShowRealAccountsList: action.bound,
             toggleShouldShowMultipliersOnboarding: action.bound,
             shouldNavigateAfterChooseCrypto: action.bound,
-            continueRouteAfterChooseCrypto: action.bound
+            continueRouteAfterChooseCrypto: action.bound,
         });
 
         const local_storage_properties = [
@@ -312,8 +312,6 @@ export default class UIStore extends BaseStore {
             // 'is_purchase_lock_on',
             'should_show_cancellation_warning',
         ];
-
-
 
         window.addEventListener('resize', this.handleResize);
         autorun(() => {
@@ -367,7 +365,7 @@ export default class UIStore extends BaseStore {
         this.screen_height = window.innerHeight;
     }
 
-    setPromptHandler(condition, cb = () => { }) {
+    setPromptHandler(condition, cb = () => {}) {
         this.prompt_when = condition;
         this.promptFn = cb;
     }

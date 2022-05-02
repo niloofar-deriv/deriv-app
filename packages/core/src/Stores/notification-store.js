@@ -67,7 +67,7 @@ export default class NotificationStore extends BaseStore {
             setShouldShowPopups: action.bound,
             toggleNotificationsModal: action.bound,
             unmarkNotificationMessage: action.bound,
-            updateNotifications: action.bound
+            updateNotifications: action.bound,
         });
 
         reaction(
