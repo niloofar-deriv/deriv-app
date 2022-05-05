@@ -7,7 +7,6 @@ import CashierNotifications from 'Containers/cashier-notifications.jsx';
 import BaseStore from './base-store';
 
 export default class GeneralStore extends BaseStore {
-
     is_loading = false;
     is_p2p_visible = false;
     p2p_notification_count = 0;
@@ -22,7 +21,7 @@ export default class GeneralStore extends BaseStore {
     should_percentage_reset = false;
     percentage = 0;
     show_p2p_in_cashier_default = false;
-    onRemount = () => { };
+    onRemount = () => {};
     constructor({ root_store, WS }) {
         super({ root_store });
         makeObservable(this, {
@@ -73,18 +72,7 @@ export default class GeneralStore extends BaseStore {
             setIsP2pVisible: action.bound,
             setLoading: action.bound,
             setActiveTab: action.bound,
-
-
-
-
-
-
-
-
-
-
-
-        })
+        });
         this.WS = WS;
         this.root_store = root_store;
 
@@ -111,8 +99,6 @@ export default class GeneralStore extends BaseStore {
             }
         );
     }
-
-
 
     active_container = Constants.containers.deposit;
     is_populating_values = false;
