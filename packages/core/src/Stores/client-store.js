@@ -176,7 +176,6 @@ export default class ClientStore extends BaseStore {
             verification_code: observable,
             new_email: observable,
             account_limits: observable,
-            account_limits: observable,
             self_exclusion: observable,
             local_currency_config: observable,
             has_cookie_account: observable,
