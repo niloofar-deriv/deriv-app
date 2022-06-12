@@ -89,6 +89,7 @@ export default class MyProfileStore extends BaseStore {
             payment_methods_list_items: computed,
             payment_methods_list_methods: computed,
             payment_methods_list_values: computed,
+            payment_method_field_set: computed,
             createPaymentMethod: action.bound,
             getAdvertiserInfo: action.bound,
             getAdvertiserPaymentMethods: action.bound,
@@ -156,6 +157,13 @@ export default class MyProfileStore extends BaseStore {
         });
 
         return list;
+    }
+
+    get payment_method_field_set() {
+        // The fields are rendered dynamically based on the response. This variable will hold a dictionary of field id and their name
+        return this.selected_payment_method_fields.reduce((dict, field_data) => {
+            return { ...dict, [field_data[0]]: field_data[1].display_name };
+        }, {});
     }
 
     get initial_values() {

@@ -728,8 +728,8 @@ export default class ClientStore extends BaseStore {
         const mt_gaming_shortcode = mt_gaming_company?.financial.shortcode || mt_gaming_company?.swap_free.shortcode;
         return financial_shortcode || gaming_shortcode || mt_gaming_shortcode
             ? eu_shortcode_regex.test(financial_shortcode) ||
-                  eu_shortcode_regex.test(gaming_shortcode) ||
-                  eu_shortcode_regex.test(mt_gaming_shortcode)
+            eu_shortcode_regex.test(gaming_shortcode) ||
+            eu_shortcode_regex.test(mt_gaming_shortcode)
             : eu_excluded_regex.test(this.residence);
     }
 
@@ -1166,18 +1166,18 @@ export default class ClientStore extends BaseStore {
                 ...response,
                 ...(is_maltainvest_account
                     ? {
-                          new_account_maltainvest: {
-                              ...response.new_account_maltainvest,
-                              currency,
-                          },
-                      }
+                        new_account_maltainvest: {
+                            ...response.new_account_maltainvest,
+                            currency,
+                        },
+                    }
                     : {}),
                 ...(is_samoa_account
                     ? {
-                          new_account_samoa: {
-                              currency,
-                          },
-                      }
+                        new_account_samoa: {
+                            currency,
+                        },
+                    }
                     : {}),
             });
         }
@@ -1334,16 +1334,6 @@ export default class ClientStore extends BaseStore {
 
         this.setIsLoggingIn(true);
         const authorize_response = await this.setUserLogin(login_new_user);
-        if (search) {
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(() => {
-                    // timeout is needed to get the token (code) from the URL before we hide it from the URL
-                    // and from LiveChat that gets the URL from Window, particularly when initialized via HTML script on mobile
-                    history.replaceState(null, null, window.location.search.replace(/&?code=[^&]*/i, ''));
-                }, 0);
-            });
-        }
-
         this.setDeviceData();
 
         // On case of invalid token, no need to continue with additional api calls.
