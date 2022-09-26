@@ -164,6 +164,7 @@ export default class UIStore extends BaseStore {
             'is_dark_mode_on',
             'is_positions_drawer_on',
             'is_reports_visible',
+            'is_warning_scam_message_modal_visible',
             // 'is_purchase_confirm_on',
             // 'is_purchase_lock_on',
             'should_show_cancellation_warning',
@@ -254,6 +255,7 @@ export default class UIStore extends BaseStore {
             showCloseUKAccountPopup: action.bound,
             is_mobile: computed,
             is_tablet: computed,
+            is_warning_scam_message_modal_visible: computed,
             is_account_switcher_disabled: computed,
             setRouteModal: action.bound,
             disableRouteModal: action.bound,
@@ -316,6 +318,8 @@ export default class UIStore extends BaseStore {
             shouldNavigateAfterChooseCrypto: action.bound,
             continueRouteAfterChooseCrypto: action.bound,
             openDerivRealAccountNeededModal: action.bound,
+            setScamMessageLocalStorage: action.bound,
+            setIsNewAccount: action.bound,
         });
 
         window.addEventListener('resize', this.handleResize);
@@ -342,6 +346,24 @@ export default class UIStore extends BaseStore {
         }
     };
 
+    get is_warning_scam_message_modal_visible() {
+        return (
+            this.root_store.client.is_logged_in &&
+            this.root_store.client.is_brazil &&
+            !this.has_read_scam_message &&
+            !this.is_new_account
+        );
+    }
+
+    setScamMessageLocalStorage() {
+        localStorage.setItem('readScamMessage', !this.has_read_scam_message);
+        this.has_read_scam_message = localStorage.getItem('readScamMessage') || false;
+    }
+
+    setIsNewAccount() {
+        localStorage.setItem('isNewAccount', !this.is_new_account);
+        this.is_new_account = localStorage.getItem('isNewAccount') || false;
+    }
     init(notification_messages) {
         this.notification_messages_ui = notification_messages;
     }
