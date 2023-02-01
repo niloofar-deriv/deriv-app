@@ -1,29 +1,11 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { NavLink } from 'react-router-dom';
 import Icon from '../../icon';
-import { TGetCardLables, TGetContractPath } from '../../types';
 
-type TResultOverlayProps = {
-    contract_id?: number;
-    getCardLabels: TGetCardLables;
-    getContractPath: TGetContractPath;
-    is_multiplier?: boolean;
-    is_positions: boolean;
-    is_unsupported: boolean;
-    is_visible: boolean;
-    onClick: () => void;
-    onClickRemove: (contract_id?: number) => void;
-    result: string;
-};
-
-type TResultStatusIcon = {
-    getCardLabels: TGetCardLables;
-    is_contract_won: boolean;
-};
-
-export const ResultStatusIcon = ({ getCardLabels, is_contract_won }: TResultStatusIcon) => (
+export const ResultStatusIcon = ({ getCardLabels, is_contract_won }) => (
     <span
         className={classNames('dc-result__caption', {
             'dc-result__caption--won': is_contract_won,
@@ -54,8 +36,8 @@ const ResultOverlay = ({
     onClick,
     onClickRemove,
     result,
-}: TResultOverlayProps) => {
-    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+}) => {
+    const handleClick = e => {
         if (is_unsupported) {
             e.preventDefault();
             onClick();
@@ -103,6 +85,18 @@ const ResultOverlay = ({
             </CSSTransition>
         </React.Fragment>
     );
+};
+
+ResultOverlay.propTypes = {
+    contract_id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    getCardLabels: PropTypes.func,
+    getContractPath: PropTypes.func,
+    is_positions: PropTypes.bool,
+    is_unsupported: PropTypes.bool,
+    is_visible: PropTypes.bool,
+    onClick: PropTypes.func,
+    onClickRemove: PropTypes.func,
+    result: PropTypes.string,
 };
 
 export default ResultOverlay;

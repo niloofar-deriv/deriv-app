@@ -1,30 +1,15 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { isHighLow, getCurrentTick, isBot } from '@deriv/shared';
-import ContractTypeCell from './contract-type-cell';
+import ContractTypeCell from './contract-type-cell.jsx';
 import Button from '../../button';
 import Icon from '../../icon';
 import Text from '../../text';
 import ProgressSlider from '../../progress-slider';
 import DesktopWrapper from '../../desktop-wrapper';
 import MobileWrapper from '../../mobile-wrapper';
-import { TContractInfo } from '@deriv/shared/src/utils/contract/contract-types';
-import { TGetCardLables, TGetContractTypeDisplay } from '../../types';
-
-export type TContractCardHeaderProps = {
-    contract_info: TContractInfo;
-    display_name: string;
-    getCardLabels: TGetCardLables;
-    getContractTypeDisplay: TGetContractTypeDisplay;
-    has_progress_slider: boolean;
-    is_mobile: boolean;
-    is_sell_requested: boolean;
-    is_valid_to_sell: boolean;
-    onClickSell: (contract_id?: number) => void;
-    server_time: moment.Moment;
-    id: number;
-};
 
 const ContractCardHeader = ({
     contract_info,
@@ -38,7 +23,7 @@ const ContractCardHeader = ({
     is_valid_to_sell,
     onClickSell,
     server_time,
-}: TContractCardHeaderProps) => {
+}) => {
     const current_tick = contract_info.tick_count ? getCurrentTick(contract_info) : null;
     const { underlying, multiplier, contract_type, shortcode, purchase_time, date_expiry, tick_count, is_sold } =
         contract_info;
@@ -112,6 +97,20 @@ const ContractCardHeader = ({
             </DesktopWrapper>
         </>
     );
+};
+
+ContractCardHeader.propTypes = {
+    contract_info: PropTypes.object,
+    display_name: PropTypes.string,
+    getCardLabels: PropTypes.func,
+    getContractTypeDisplay: PropTypes.func,
+    has_progress_slider: PropTypes.bool,
+    is_mobile: PropTypes.bool,
+    is_sell_requested: PropTypes.bool,
+    is_valid_to_sell: PropTypes.bool,
+    onClickSell: PropTypes.func,
+    server_time: PropTypes.object,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default ContractCardHeader;

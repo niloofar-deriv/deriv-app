@@ -1,22 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export type TContractCardItemProps = {
-    className: string;
-    header: string;
-    is_crypto: boolean;
-    is_loss: boolean;
-    is_won: boolean;
-};
-
-const ContractCardItem = ({
-    className,
-    children,
-    header,
-    is_crypto,
-    is_loss,
-    is_won,
-}: React.PropsWithChildren<Partial<TContractCardItemProps>>) => {
+const ContractCardItem = ({ className, children, header, is_crypto, is_loss, is_won }) => {
     return (
         <div className={classNames('dc-contract-card-item', className)}>
             <div className='dc-contract-card-item__header'>{header}</div>
@@ -31,6 +17,15 @@ const ContractCardItem = ({
             </div>
         </div>
     );
+};
+
+ContractCardItem.propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+    header: PropTypes.string,
+    is_crypto: PropTypes.bool,
+    is_loss: PropTypes.bool,
+    is_won: PropTypes.bool,
 };
 
 export default ContractCardItem;
