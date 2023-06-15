@@ -208,8 +208,9 @@ const App = () => {
         }
         setP2POrderProps({
             order_id,
-            setP2POrderTab: general_store.setP2POrderTab,
-            setIsRatingModalOpen: order_store.setIsRatingModalOpen,
+            redirectToOrderDetails: general_store.redirectToOrderDetails,
+            setIsRatingModalOpen: is_open =>
+                is_open ? general_store.showModal({ key: 'RatingModal' }) : general_store.hideModal(),
             navigateToOrderDetails,
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
