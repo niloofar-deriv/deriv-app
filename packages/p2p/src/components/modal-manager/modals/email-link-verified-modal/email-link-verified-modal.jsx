@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, Loading, Modal, Text } from '@deriv/components';
+import { Button, Icon, Modal, Text } from '@deriv/components';
 import { formatMoney } from '@deriv/shared';
 import { Localize } from 'Components/i18next';
 import { useStores } from 'Stores';
@@ -15,15 +15,15 @@ const EmailLinkVerifiedModal = () => {
     );
 
     return (
-        <Modal
-            has_close_icon={order_store.order_information}
-            is_open={is_modal_open}
-            renderTitle={() => <></>}
-            toggleModal={hideModal}
-            width='440px'
-        >
-            {order_store.order_information ? (
-                <React.Fragment>
+        <React.Fragment>
+            {order_store.order_information && (
+                <Modal
+                    has_close_icon={order_store.order_information}
+                    is_open={is_modal_open}
+                    renderTitle={() => <></>}
+                    toggleModal={hideModal}
+                    width='440px'
+                >
                     <Modal.Body className='email-verified-modal'>
                         <Icon icon='IcEmailVerificationLinkValid' size='128' />
                         <Text className='email-verified-modal--text' color='prominent' size='s' weight='bold'>
@@ -48,13 +48,9 @@ const EmailLinkVerifiedModal = () => {
                             <Localize i18n_default_text='Confirm' />
                         </Button>
                     </Modal.Footer>
-                </React.Fragment>
-            ) : (
-                <Modal.Body className='email-verified-modal'>
-                    <Loading is_fullscreen={false} />
-                </Modal.Body>
+                </Modal>
             )}
-        </Modal>
+        </React.Fragment>
     );
 };
 
