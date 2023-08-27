@@ -66,6 +66,12 @@ export default defineConfig({
         //   name: 'Google Chrome',
         //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
         // },
+
+        /* Run tests for each of our packages from root of the project */
+        {
+            name: 'integration',
+            testDir: './packages/integration/src/integration-test',
+        },
     ],
 
     /* Run your local dev server before starting the tests */

@@ -495,7 +495,7 @@ export async function createMockServer(
 
     wss.on('connection', ws => {
         ws.on('message', async message => {
-            const parsedMessage = JSON.parse(message);
+            const parsedMessage = JSON.parse(message.toString());
             const context: Context = {
                 request: parsedMessage,
                 req_id: parsedMessage.req_id,
