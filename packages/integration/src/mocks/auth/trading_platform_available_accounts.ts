@@ -3,8 +3,7 @@ import { Context } from '../../utils/mocks/mocks';
 export default function mock_trading_platform_available_accounts(context: Context) {
     if (
         'trading_platform_available_accounts' in context.request &&
-        context.request.trading_platform_available_accounts === 1 &&
-        context.request.platform === 'mt5'
+        context.request.trading_platform_available_accounts === 1
     ) {
         context.response = {
             echo_req: {
@@ -12,7 +11,7 @@ export default function mock_trading_platform_available_accounts(context: Contex
                 req_id: context.req_id,
                 trading_platform_available_accounts: 1,
             },
-            msg_type: 'trading_platform_available_accounts',
+            msg_type: 'transfer_between_accounts',
             req_id: context.req_id,
             trading_platform_available_accounts: [
                 {

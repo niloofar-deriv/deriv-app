@@ -13,8 +13,9 @@ import mock_trading_platform_available_accounts from './trading_platform_availab
 import mock_platform_mt5 from './platform_mt5';
 import mock_platform_dxtrade from './platform_dxtrade';
 import mock_trading_platform_accounts from './trading_platform_accounts';
+import { Context } from '../../utils/mocks/mocks';
 
-const loggedIn = async context => {
+const loggedIn = async (context: Context) => {
     mock_authorize(context);
     mock_balance_all(context);
     mock_balance_one(context);

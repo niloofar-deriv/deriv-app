@@ -61,9 +61,9 @@ export default function mock_get_limits(context: Context) {
                         {
                             level: 'market',
                             name: 'Cryptocurrencies',
-                            payout_limit: '100.00',
+                            payout_limit: 100.0,
                             profile_name: 'extreme_risk',
-                            turnover_limit: '1000.00',
+                            turnover_limit: 1000.0,
                         },
                     ],
                     forex: [

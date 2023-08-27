@@ -1,7 +1,7 @@
 import { Context } from '../../utils/mocks/mocks';
 
 function mock_residents_list(context: Context) {
-    if (context.request.residence_list === 1) {
+    if (context.response) {
         context.response = {
             echo_req: {
                 req_id: context.req_id,

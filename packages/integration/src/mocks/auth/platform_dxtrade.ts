@@ -1,11 +1,7 @@
 import { Context } from '../../utils/mocks/mocks';
 
 export default function mock_platform_dxtrade(context: Context) {
-    if (
-        'platform' in context.request &&
-        context.request.platform === 'dxtrade' &&
-        context.request.trading_servers === 1
-    ) {
+    if ('platform' in context.request && context.request.platform === 'dxtrade') {
         context.response = {
             echo_req: {
                 platform: 'dxtrade',

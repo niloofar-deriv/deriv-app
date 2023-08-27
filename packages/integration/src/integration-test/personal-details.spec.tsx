@@ -12,6 +12,7 @@ test.describe('Personal Details', () => {
             page,
             mocks: [mockGeneral, mockLoggedIn, mockResidentsList, mockStatesList],
         });
+
         await page.goto(`${baseURL}/account/personal-details`);
 
         const firstName = await page.getByLabel('First name*').first();
