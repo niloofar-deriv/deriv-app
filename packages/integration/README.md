@@ -1,6 +1,6 @@
 # @deriv/integration
 
-This package contains the necessary **E2E** tests configurations, you can easily install and use these configurations.
+This package contains the global files and mocked data for writing your integration tests in the deriv projects, you can easily install this package and use these data inside your tests.
 
 It uses [playwright](https://playwright.dev/) as its main framework and you can simply write test with it.
 We strongly suggest you to read the [documentation](https://playwright.dev/docs/intro) of playwright once before you get started.
@@ -74,5 +74,3 @@ npx playwright test example.spec.ts --debug
 ```
 npx playwright test example.spec.ts:10 --debug
 ```
-
-<!-- TODO add more details to this .md file and update the information -->
