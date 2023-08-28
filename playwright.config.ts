@@ -70,7 +70,11 @@ export default defineConfig({
         /* Run tests for each of our packages from root of the project */
         {
             name: 'integration',
-            testDir: './packages/integration/src/integration-test',
+            testDir: './packages/integration/integration-test',
+        },
+        {
+            name: 'account',
+            testDir: './packages/account/integration-test',
         },
     ],
 
