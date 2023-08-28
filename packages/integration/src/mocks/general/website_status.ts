@@ -1,4 +1,4 @@
-import { Context } from '../../utils/mocks/mocks';
+import { Context } from 'Utils/mocks/mocks';
 
 export default function mock_website_status(context: Context) {
     if ('website_status' in context.request && context.request.website_status === 1) {

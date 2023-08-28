@@ -1,4 +1,4 @@
-import { Context } from '../../utils/mocks/mocks';
+import { Context } from 'Utils/mocks/mocks';
 
 export default function mock_platform_dxtrade(context: Context) {
     if ('platform' in context.request && context.request.platform === 'dxtrade') {

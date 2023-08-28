@@ -1,4 +1,4 @@
-import { Context } from '../../utils/mocks/mocks';
+import { Context } from 'Utils/mocks/mocks';
 
 export default function mock_landing_company(context: Context) {
     if ('landing_company' in context.request && context.request.landing_company === 'svg') {

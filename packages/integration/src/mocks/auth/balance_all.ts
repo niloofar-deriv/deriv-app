@@ -1,4 +1,4 @@
-import { Context } from '../../utils/mocks/mocks';
+import { Context } from 'Utils/mocks/mocks';
 
 export default function mock_balance_all(context: Context) {
     if ('balance' in context.request && context.request.balance === 1 && context.request.account === 'all') {

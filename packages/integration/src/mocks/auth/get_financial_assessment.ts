@@ -1,4 +1,4 @@
-import { Context } from '../../utils/mocks/mocks';
+import { Context } from 'Utils/mocks/mocks';
 
 export default function mock_get_financial_assessment(context: Context) {
     if ('get_financial_assessment' in context.request && context.request.get_financial_assessment === 1) {
