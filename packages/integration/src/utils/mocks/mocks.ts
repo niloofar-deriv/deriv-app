@@ -2,7 +2,7 @@ import * as https from 'https';
 import { EventEmitter } from 'events';
 import { Server as WsServer } from 'ws';
 import { generate } from 'selfsigned';
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 import type {
     APITokenRequest,
@@ -507,6 +507,10 @@ export async function createMockServer(
             if (context.response) {
                 ws.send(JSON.stringify(context.response));
             }
+
+            if (!context.response) {
+                console.warn('mock websocket request was not handled for', context.request);
+            }
         });
     });
 
@@ -548,12 +552,23 @@ async function setupMocks({ baseURL, page, mocks }: SetupMocksOptions) {
         mockServer.close();
     });
     await page.goto(baseURL, { waitUntil: 'commit' });
+
     await page.evaluate(server_url => {
         window.localStorage.setItem('config.server_url', server_url);
     }, mockServer.url);
+
     await page.goto(
         `${baseURL}/?acct1=CR5712715&token1=a1-x0000000000000000000000000001&cur1=USD&acct2=CR5712710&token2=a1-x0000000000000000000000000002&cur2=BTC&acct3=VRTC8420051&token3=a1-x0000000000000000000000000003&cur3=USD&state=`
     );
+
+    await expect
+        .poll(async () => {
+            return page.evaluate(() => {
+                return window.localStorage.getItem('active_loginid');
+            });
+        })
+        .toBe('CR5712715');
+
     return mockServer;
 }
 

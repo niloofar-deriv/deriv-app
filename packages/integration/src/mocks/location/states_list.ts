@@ -1,7 +1,7 @@
 import { Context } from 'Utils/mocks/mocks';
 
 function mock_states_list(context: Context) {
-    if (context.response) {
+    if ('states_list' in context.request) {
         context.response = {
             echo_req: {
                 req_id: context.req_id,
