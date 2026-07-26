@@ -40,7 +40,7 @@
         "@deriv/js-interpreter": "^3.0.0",
         "@deriv/shared": "^1.0.0",
         "@deriv/translations": "^1.0.0",
-        "blockly": "^10.4.3",
+        "blockly": "^13.1.1",
         "file-saver": "^2.0.2",
         "immutable": "^3.8.2",
         "localforage": "^1.9.0",
