@@ -138,7 +138,7 @@
         "mobx": "^6.6.1",
         "mobx-react-lite": "^3.4.0",
         "mobx-utils": "^6.0.5",
-        "moment": "^2.29.2",
+        "moment": "^2.31.0",
         "null-loader": "^4.0.1",
         "object.fromentries": "^2.0.0",
         "postcss-rtlcss": "^4.0.9",
